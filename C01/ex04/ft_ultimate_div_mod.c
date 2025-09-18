@@ -20,3 +20,11 @@ void	ft_ultimate_div_mod(int *a, int *b)
 	*a = i;
 	*b = j;
 }
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	int	i=3;
+// 	int	j=2;
+// 	ft_ultimate_div_mod(&i, &j);
+// 	printf("%d %d", i, j);
+// }

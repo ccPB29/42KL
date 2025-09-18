@@ -15,18 +15,39 @@ void	ft_sort_int_tab(int *tab, int size)
 	int	t;
 	int	i;
 
-	while(size){
-i = 0;
-while(i < size)
+	while (size > 1)
 	{
-		if(tab[i] > tab[i + 1])
+		i = 0;
+		while (i < size - 1)
 		{
-			t = tab[i];
-			tab[i] = tab[i + 1];
-			tab[i + i] = t;
+			if (tab[i] > tab[i + 1])
+			{
+				t = tab[i];
+				tab[i] = tab[i + 1];
+				tab[i + 1] = t;
+			}
+			i++;
 		}
-		i++;
-	}
-	size--;
+		size--;
 	}
 }
+
+// #include <stdio.h>
+// void print_array(int *tab, int size)
+// {
+//     for (int i = 0; i < size; i++)
+//         printf("%d ", tab[i]);
+//     printf("\n");
+// }
+
+// int main(void)
+// {
+//     int arr[] = {5, 2, 9, 1, 7};
+//     int size = 5;
+
+//     print_array(arr, size);
+//     ft_sort_int_tab(arr, size);
+//     print_array(arr, size);
+
+//     return 0;
+// }

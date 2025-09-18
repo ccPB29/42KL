@@ -15,10 +15,16 @@
 void	ft_putstr(char *str)
 {
 	if (str == NULL)
-		return;
+		return ;
 	while (*str != '\0')
 	{
 		write(1, str, 1);
 		str++;
 	}
 }
+
+// int	main(void)
+// {
+// 	char	*i="asdaf";
+// 	ft_putstr(i);
+// }

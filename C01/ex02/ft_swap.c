@@ -18,3 +18,12 @@ void	ft_swap(int *a, int *b)
 	*b = *a;
 	*a = i;
 }
+
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	int	i=0;
+// 	int j=1;
+// 	ft_swap(&i, &j);
+// 	printf("%d %d", i, j);
+// }
