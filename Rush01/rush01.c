@@ -6,27 +6,11 @@ int	cton(char c)
 	return (i);
 }
 
-int	count(int *arr)
+void	rush()
 {
-	int	c;
-	int	i;
-	int	t;
+	int	grid[4][4];
 
-	i = 0;
-	c = 1;
-	while (arr[i] && arr[i + 1])
-	{
-		if (arr[i] < arr[i + 1])
-		{
-			c++;
-			t = arr[i + 1];
-		}
-		else
-		{
-			t = arr[i];
-		}
-		i++;
-	}
+	
 }
 
 void	main(int argc, char *argv[])
