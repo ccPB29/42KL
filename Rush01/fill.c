@@ -84,6 +84,7 @@ void	fill(int grid[4][4], int pos/*, int top_col[4], int left_row[4], int bot_co
 	{
 		grid[row][col] = val;
 		if (val != 3)
+		{	
 			fill(grid, pos+1);
 			// return;
 		}
