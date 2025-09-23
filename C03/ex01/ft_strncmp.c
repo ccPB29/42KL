@@ -30,7 +30,7 @@ int	ft_strncmp(char *s1, char *s2, unsigned int n)
 // #include <string.h>
 
 // int main() {
-//     printf("%d %d\n", strcmp("ab", "abc"), ft_strcmp("ab", "abc")); 
-//     printf("%d %d\n", strcmp("ab", "ab"), ft_strcmp("ab", "ab"));  
-//     printf("%d %d\n", strcmp("abd", "ab"), ft_strcmp("abd", "ab"));  
+//     printf("%d %d\n", strncmp("ab", "abc", 2), ft_strncmp("ab", "abc", 2)); 
+//     printf("%d %d\n", strncmp("ab", "ab", 4), ft_strncmp("ab", "ab", 4));  
+//     printf("%d %d\n", strncmp("abd", "ab",4), ft_strncmp("abd", "ab", 4));  
 // }

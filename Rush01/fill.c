@@ -83,12 +83,12 @@ void	fill(int grid[4][4], int pos/*, int top_col[4], int left_row[4], int bot_co
 	while (val <= 4)
 	{
 		grid[row][col] = val;
-		if (val != 3)
-		{	
+		// if (val != 3)
+		// {	
 			fill(grid, pos+1);
 			// return;
-		}
-		// grid[row][col] = 0;
+		// }
+		// // grid[row][col] = 0;
 		val++;
 	}
 }
@@ -96,8 +96,8 @@ void	fill(int grid[4][4], int pos/*, int top_col[4], int left_row[4], int bot_co
 
 int	main(int argc, char *argv[])
 {
-	int	grid[4][4];
+	int	grid[4][4]={0};
 
-	fill(grid, 0);
+	// fill(grid, 0);
 	print(grid);
 }
