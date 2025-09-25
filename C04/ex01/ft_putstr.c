@@ -1,38 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luli2 <marvin@42.fr>                       #+#  +:+       +#+        */
+/*   By: luli2 <luli2@student.42kl.edu.my>          #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-09-13 07:43:45 by luli2             #+#    #+#             */
-/*   Updated: 2025-09-13 07:43:45 by luli2            ###   ########.fr       */
+/*   Created: 2025-09-25 10:45:44 by luli2             #+#    #+#             */
+/*   Updated: 2025-09-25 10:45:44 by luli2            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strcpy(char *dest, char *src)
+#include <unistd.h>
+
+void	ft_putstr(char *str)
 {
 	int	i;
 
 	i = 0;
-	while (src[i] != '\0')
+	while (str[i] != '\0')
 	{
-		dest[i] = src[i];
+		write(1, &str[i], 1);
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
 }
 
 // #include <stdio.h>
+
 // int	main(void)
 // {
-// 	char src[] = "Hello, World!";
-// 	char dest[50];
-
-// 	ft_strcpy(dest, src);
-// 	printf("src:  \"%s\"\n", src);
-// 	printf("dest: \"%s\"\n", dest);
+// 	ft_putstr("Hello, world!\n");   // 普通字符串
+// 	ft_putstr("");                  // 空字符串（啥都不会输出）
+// 	// ft_putstr(NULL);             // 小心！NULL 会段错误
 
 // 	return (0);
 // }

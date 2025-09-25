@@ -60,9 +60,9 @@ unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
 // 	ret = ft_strlcat(buf3, "6789", 6);
 // 	printf("Case3: dest=\"%s\", return=%u\n", buf3, ret);
 
-// 	// 情况4：size 在 dest 长度和最终长度之间
-// 	char buf4[10] = "ABC";
-// 	ret = ft_strlcat(buf4, "DEFGHI", 8);
+// 	//情况4：size 在 dest 长度和最终长度之间
+// 	char buf4[4] = "ABC";
+// 	ret = ft_strlcat(buf4, "DEFGHI", 6);
 // 	printf("Case4: dest=\"%s\", return=%u\n", buf4, ret);
 
 // 	return 0;

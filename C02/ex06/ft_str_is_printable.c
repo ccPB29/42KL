@@ -1,38 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_str_is_printable.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: luli2 <marvin@42.fr>                       #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-09-13 07:43:45 by luli2             #+#    #+#             */
-/*   Updated: 2025-09-13 07:43:45 by luli2            ###   ########.fr       */
+/*   Created: 2025-09-25 07:07:00 by luli2             #+#    #+#             */
+/*   Updated: 2025-09-25 07:07:00 by luli2            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strcpy(char *dest, char *src)
+int	ft_str_is_printable(char *str)
 {
 	int	i;
 
 	i = 0;
-	while (src[i] != '\0')
+	while (str[i] != '\0')
 	{
-		dest[i] = src[i];
+		if (str[i] < 32 || str[i] > 126)
+			return (0);
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
+	return (1);
 }
 
 // #include <stdio.h>
+
 // int	main(void)
 // {
-// 	char src[] = "Hello, World!";
-// 	char dest[50];
-
-// 	ft_strcpy(dest, src);
-// 	printf("src:  \"%s\"\n", src);
-// 	printf("dest: \"%s\"\n", dest);
+// 	printf("%s %s\n", "Hello123", ft_str_is_printable("Hello123"));
+// 	printf("%s %s\n", "Hello World!", ft_str_is_printable("Hello World!"));
+// 	printf("%s %s\n", "\nHello", ft_str_is_printable("\nHello"));
+// 	printf("%s %s\n", "Tab\tTest", ft_str_is_printable("Tab\tTest"));
+// 	printf("%s %s\n", "", ft_str_is_printable(""));
 
 // 	return (0);
 // }
