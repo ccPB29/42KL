@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_program_name.c                            :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: luli2 <luli2@student.42kl.edu.my>          #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-09-28 13:25:12 by luli2             #+#    #+#             */
-/*   Updated: 2025-09-28 13:25:12 by luli2            ###   ########.fr       */
+/*   Created: 2025-09-30 06:58:56 by luli2             #+#    #+#             */
+/*   Updated: 2025-09-30 06:58:56 by luli2            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <stdlib.h>
 
-int	main(int argc, char	*argv[])
+char	*ft_strdup(char *src)
 {
-	int	i;
+	char	*str;
+	int		i;
 
-	if (argc < 1)
-		return (0);
 	i = 0;
-	while (argv[0][i] != '\0')
+	if (!src)
+		return (NULL);
+	while (src[i])
+		i++;
+	str = (char *)malloc((i + 1) * sizeof(char));
+	i = 0;
+	while (src[i])
 	{
-		write(1, &argv[0][i], 1);
+		str[i] = src[i];
 		i++;
 	}
-	write(1, "\n", 1);
+	str[i] = '\0';
+	return (str);
 }

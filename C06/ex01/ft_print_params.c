@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_program_name.c                            :+:      :+:    :+:   */
+/*   ft_print_params.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: luli2 <luli2@student.42kl.edu.my>          #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-09-28 13:25:12 by luli2             #+#    #+#             */
-/*   Updated: 2025-09-28 13:25:12 by luli2            ###   ########.fr       */
+/*   Created: 2025-09-30 05:56:18 by luli2             #+#    #+#             */
+/*   Updated: 2025-09-30 05:56:18 by luli2            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-int	main(int argc, char	*argv[])
+int	main(int argc, char **argv)
 {
 	int	i;
+	int	j;
 
 	if (argc < 1)
 		return (0);
-	i = 0;
-	while (argv[0][i] != '\0')
+	i = 1;
+	while (argv[i])
 	{
-		write(1, &argv[0][i], 1);
+		j = 0;
+		while (argv[i][j])
+		{
+			write(1, &argv[i][j], 1);
+			j++;
+		}
+		write(1, "\n", 1);
 		i++;
 	}
-	write(1, "\n", 1);
 }
