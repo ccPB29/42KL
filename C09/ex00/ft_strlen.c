@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft.h                                               :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luli2 <luli2@student.42kl.edu.my>          #+#  +:+       +#+        */
+/*   By: luli2 <marvin@42.fr>                       #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-10-01 13:25:24 by luli2             #+#    #+#             */
-/*   Updated: 2025-10-01 13:25:24 by luli2            ###   ########.fr       */
+/*   Created: 2025-09-13 10:07:34 by luli2             #+#    #+#             */
+/*   Updated: 2025-09-13 10:07:34 by luli2            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_H
-# define FT_H
+int	ft_strlen(char *str)
+{
+	int	i;
 
-void	ft_putchar(char c);
-void	ft_swap(int *a, int *b);
-void	ft_putstr(char *str);
-int		ft_strlen(char *str);
-int		ft_strcmp(char *s1, char *s2);
-
-#endif
+	i = 0;
+	while (str[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
+}
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	char	*c="asdaf";
+// 	printf("%d", ft_strlen(c));
+// }

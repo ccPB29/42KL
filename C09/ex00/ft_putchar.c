@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft.h                                               :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luli2 <luli2@student.42kl.edu.my>          #+#  +:+       +#+        */
+/*   By: luli2 <marvin@42.fr>                       #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-10-01 13:25:24 by luli2             #+#    #+#             */
-/*   Updated: 2025-10-01 13:25:24 by luli2            ###   ########.fr       */
+/*   Created: 2025-09-12 09:24:22 by luli2             #+#    #+#             */
+/*   Updated: 2025-09-12 09:24:22 by luli2            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_H
-# define FT_H
+#include <unistd.h>
 
-void	ft_putchar(char c);
-void	ft_swap(int *a, int *b);
-void	ft_putstr(char *str);
-int		ft_strlen(char *str);
-int		ft_strcmp(char *s1, char *s2);
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
 
-#endif
+// int	main(void)
+// {
+// 	ft_putchar('A');
+// 	return 0;
+// }

@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft.h                                               :+:      :+:    :+:   */
+/*   ft_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: luli2 <luli2@student.42kl.edu.my>          #+#  +:+       +#+        */
+/*   By: luli2 <marvin@42.fr>                       #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-10-01 13:25:24 by luli2             #+#    #+#             */
-/*   Updated: 2025-10-01 13:25:24 by luli2            ###   ########.fr       */
+/*   Created: 2025-09-13 09:29:50 by luli2             #+#    #+#             */
+/*   Updated: 2025-09-13 09:29:50 by luli2            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_H
-# define FT_H
+void	ft_swap(int *a, int *b)
+{
+	int	i;
 
-void	ft_putchar(char c);
-void	ft_swap(int *a, int *b);
-void	ft_putstr(char *str);
-int		ft_strlen(char *str);
-int		ft_strcmp(char *s1, char *s2);
+	i = *b;
+	*b = *a;
+	*a = i;
+}
 
-#endif
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	int	i=0;
+// 	int j=1;
+// 	ft_swap(&i, &j);
+// 	printf("%d %d", i, j);
+// }
