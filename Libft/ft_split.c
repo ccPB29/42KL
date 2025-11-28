@@ -12,75 +12,85 @@
 
 #include "libft.h"
 
-static int	count_words(char const *s, char c)
+static int	count_words(const char *s, char c)
 {
 	int	count;
 	int	in_word;
-	int	i;
 
 	count = 0;
 	in_word = 0;
-	i = 0;
-	while (s[i] != '\0')
+	while (*s)
 	{
-		if (s[i] != c && in_word == 0)
+		if (*s == c)
+			in_word = 0;
+		else if (!in_word)
 		{
 			in_word = 1;
 			count++;
 		}
-		else if (s[i] == c)
-			in_word = 0;
-		i++;
+		s++;
 	}
 	return (count);
 }
 
-static char	*ft_worddup(char const *s, int start, int end)
+void	free_split(char **split)
 {
-	char	*word;
-	int		i;
-	int		len;
+	int	i;
 
-	len = end - start;
-	word = (char *)malloc(sizeof(char) * (len + 1));
-	if (!word)
-		return (NULL);
+	if (!split)
+		return ;
 	i = 0;
-	while (i < len)
+	while (split[i])
 	{
-		word[i] = s[start + i];
+		free(split[i]);
 		i++;
 	}
-	word[i] = '\0';
+	free(split);
+}
+
+static char	*extract_word(const char *s, char c)
+{
+	char	*word;
+	int		len;
+
+	len = 0;
+	while (s[len] && s[len] != c)
+		len++;
+	word = (char *)malloc(len + 1);
+	if (!word)
+		return (NULL);
+	ft_memcpy(word, s, len);
+	word[len] = '\0';
 	return (word);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**arr;
+	char	**split;
+	int		num_words;
 	int		i;
-	int		j;
-	int		start;
-	int		words;
 
 	if (!s)
 		return (NULL);
-	words = count_words(s, c);
-	arr = (char **)malloc(sizeof(char *) * (words + 1));
+	num_words = count_words(s, c);
+	split = (char **)malloc(sizeof(char *) * (num_words + 1));
+	if (!split)
+		return (NULL);
 	i = 0;
-	j = 0;
-	while (s[i] != '\0' && j < words)
+	while (*s)
 	{
-		while (s[i] == c)
-			i++;
-		start = i;
-		while (s[i] != '\0' && s[i] != c)
-			i++;
-		arr[j] = ft_worddup(s, start, i);
-		j++;
+		if (*s != c)
+		{
+			split[i++] = extract_word(s, c);
+			while (*s && *s != c)
+				s++;
+		}
+		else
+			s++;
 	}
-	arr[j] = NULL;
-	return (arr);
+	split[num_words] = NULL;
+	return (split);
+	free_split(split);
 }
 
 // #include <stdio.h>
