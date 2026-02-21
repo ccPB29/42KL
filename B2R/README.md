@@ -65,7 +65,7 @@ usermod -aG user42 luli2
 sudo crontab -e
 * * * * * 这五个星号分别代表：分钟、小时、日期、月份、星期几。
 uname 命令从内核（Kernel）获取系统信息。参数 -a (all) 会返回内核版本、主机名、处理器架构和操作系统类型。
-uname 命令从内核（Kernel）获取系统信息。参数 -a (all) 会返回内核版本、主机名、处理器架构和操作系统类型。sort | uniq 去重（Eliminate duplicates），再用 wc -l 计数，得到物理硬件的数量。processor 条目代表逻辑核心（包含超线程）。直接计数即得到虚拟 CPU 总数。
+sort | uniq 去重（Eliminate duplicates），再用 wc -l 计数，得到物理硬件的数量。processor 条目代表逻辑核心（包含超线程）。直接计数即得到虚拟 CPU 总数。
 free -m 从 /proc/meminfo 提取内存统计并以 MB 为单位显示。
 df -Bg 以 GB 为单位列出文件系统。grep '^/dev/' 只看真实的物理磁盘分区；grep -v '/boot$' 排除（Exclude）掉启动分区
 top -bn1 运行一次批处理模式（Batch mode）的性能检测.CPU 负载通常由用户态（us）和内核态（sy）相加得出
@@ -115,6 +115,53 @@ VirtualBox与UTM：
 	vb: 虚拟机代码交给物理机执行，要求cpu架构一致
 	utm: 如果是跨架构启用QEMU重编译
 
+Eva:
+`物理资源虚拟化，分割误以为独占。提供隔离环境。
+
+sudo ufw status
+sudo systemctl status ssh
+hostnamectl
+
+groups luli2
+sudo adduser new
+密码：sudo nano /etc/pam.d/common-password | sudo nano /etc/login.defs
+sudo addgroup newg
+sudo usermod -aG new newg
+
+hostname
+ <host>
+ sudo nano /etc/hostname
+ sudo nano /etc/hosts
+ sudo reboot
+lsblk
+LVM: 把物理盘变成卷组（虚拟存储池），动态分配
+
+‘dpkg -l | grep sudo’
+sudo usermod -aG sudo xxx
+SUDO: 权限管理并追踪
+sudo visudo
+sudo cat /var/log/sudo/sudo.log
+`sudoreplay -l -d /var/log/sudo
+sudoreplay -d /var/log/sudo xxxxxx
+
+`sudo ufw status verbose
+sudo ufw status numbered
+sudo ufw allow 8080
+sudo ufw delete xxx
+
+SSH: 加密通道
+·dpkg -l | grep openssh-server
+`sudo systemctl status ssh
+sudo ss -tunlp
+sudo cat /etc/ssh/sshd_config
+`ip a
+ssh user@ip/localhost -p 4242
+ssh root@~
+
+cat /usr/local/bin/monitoring.sh
+
+cron: 基于时间的调度器
+sudo crontab -e
 
 Resource：
 AI：指导安装并解答
