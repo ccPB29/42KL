@@ -1,3 +1,4 @@
+// cc main.c -L. -lftprintf -o my_program
 #include <stdio.h>    // 用于标准 printf
 #include "ft_printf.h" // 替换为你的 ft_printf 头文件路径
 #include <limits.h>
