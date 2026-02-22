@@ -53,11 +53,12 @@ char	*ft_strjoin(char *savestr, char *buff)
 		savestr = (char *)malloc(1 * sizeof(char));
 		savestr[0] = '\0';
 	}
-	if (!savestr || !buff)
-		return (NULL);
 	str = malloc(sizeof(char) * ((ft_strlen(savestr) + ft_strlen(buff)) + 1));
 	if (str == NULL)
+	{
+		free(savestr);
 		return (NULL);
+	}
 	i = -1;
 	j = 0;
 	if (savestr)

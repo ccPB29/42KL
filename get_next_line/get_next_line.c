@@ -81,7 +81,10 @@ char	*new_savestr(char *savestr)
 	}
 	str = (char *)malloc(sizeof(char) * (ft_strlen(savestr) - i + 1));
 	if (!str)
+	{
+		free(savestr);
 		return (NULL);
+	}
 	i++;
 	j = 0;
 	while (savestr[i])
