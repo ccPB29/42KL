@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lli2 <lli2@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: luli2 <luli2@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/10 14:34:17 by lli2              #+#    #+#             */
-/*   Updated: 2025/02/11 10:25:30 by lli2             ###   ########.fr       */
+/*   Created: 2026/02/22 08:43:10 by luli2             #+#    #+#             */
+/*   Updated: 2026/02/22 08:43:13 by luli2            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ size_t	ft_strlen(char *s)
 	return (i);
 }
 
-char	*ft_strchr(char *s, int c)
+char	*ft_strchr(char *s, char c)
 {
 	int	i;
 
@@ -35,37 +35,37 @@ char	*ft_strchr(char *s, int c)
 		return ((char *)&s[ft_strlen(s)]);
 	while (s[i] != '\0')
 	{
-		if (s[i] == (char) c)
+		if (s[i] == c)
 			return ((char *)&s[i]);
 		i++;
 	}
 	return (0);
 }
 
-char	*ft_strjoin(char *left_str, char *buff)
+char	*ft_strjoin(char *savestr, char *buff)
 {
 	size_t	i;
 	size_t	j;
 	char	*str;
 
-	if (!left_str)
+	if (!savestr)
 	{
-		left_str = (char *)malloc(1 * sizeof(char));
-		left_str[0] = '\0';
+		savestr = (char *)malloc(1 * sizeof(char));
+		savestr[0] = '\0';
 	}
-	if (!left_str || !buff)
+	if (!savestr || !buff)
 		return (NULL);
-	str = malloc(sizeof(char) * ((ft_strlen(left_str) + ft_strlen(buff)) + 1));
+	str = malloc(sizeof(char) * ((ft_strlen(savestr) + ft_strlen(buff)) + 1));
 	if (str == NULL)
 		return (NULL);
 	i = -1;
 	j = 0;
-	if (left_str)
-		while (left_str[++i] != '\0')
-			str[i] = left_str[i];
+	if (savestr)
+		while (savestr[++i] != '\0')
+			str[i] = savestr[i];
 	while (buff[j] != '\0')
 		str[i++] = buff[j++];
-	str[ft_strlen(left_str) + ft_strlen(buff)] = '\0';
-	free(left_str);
+	str[ft_strlen(savestr) + ft_strlen(buff)] = '\0';
+	free(savestr);
 	return (str);
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lli2 <lli2@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: luli2 <luli2@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/10 14:34:10 by lli2              #+#    #+#             */
-/*   Updated: 2025/02/11 10:25:23 by lli2             ###   ########.fr       */
+/*   Created: 2026/02/22 08:43:26 by luli2             #+#    #+#             */
+/*   Updated: 2026/02/22 08:43:29 by luli2            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_read_to_left_str(int fd, char *left_str)
+char	*read_a_save(int fd, char *savestr)
 {
 	char	*buff;
 	int		rd_bytes;
@@ -21,87 +21,88 @@ char	*ft_read_to_left_str(int fd, char *left_str)
 	if (!buff)
 		return (NULL);
 	rd_bytes = 1;
-	while (!ft_strchr(left_str, '\n') && rd_bytes != 0)
+	while (!ft_strchr(savestr, '\n') && rd_bytes != 0)
 	{
 		rd_bytes = read(fd, buff, BUFFER_SIZE);
 		if (rd_bytes == -1)
 		{
 			free(buff);
+			free(savestr);
 			return (NULL);
 		}
 		buff[rd_bytes] = '\0';
-		left_str = ft_strjoin(left_str, buff);
+		savestr = ft_strjoin(savestr, buff);
 	}
 	free(buff);
-	return (left_str);
+	return (savestr);
 }
 
-char	*ft_get_line(char *left_str)
+char	*extract_line(char *savestr)
 {
 	int		i;
 	char	*str;
 
 	i = 0;
-	if (!left_str[i])
+	if (!savestr[i])
 		return (NULL);
-	while (left_str[i] && left_str[i] != '\n')
+	while (savestr[i] && savestr[i] != '\n')
 		i++;
 	str = (char *)malloc(sizeof(char) * (i + 2));
 	if (!str)
 		return (NULL);
 	i = 0;
-	while (left_str[i] && left_str[i] != '\n')
+	while (savestr[i] && savestr[i] != '\n')
 	{
-		str[i] = left_str[i];
+		str[i] = savestr[i];
 		i++;
 	}
-	if (left_str[i] == '\n')
+	if (savestr[i] == '\n')
 	{
-		str[i] = left_str[i];
+		str[i] = savestr[i];
 		i++;
 	}
 	str[i] = '\0';
 	return (str);
 }
 
-char	*ft_new_left_str(char *left_str)
+char	*new_savestr(char *savestr)
 {
 	int		i;
 	int		j;
 	char	*str;
 
 	i = 0;
-	while (left_str[i] && left_str[i] != '\n')
+	while (savestr[i] && savestr[i] != '\n')
 		i++;
-	if (!left_str[i])
+	if (!savestr[i])
 	{
-		free(left_str);
+		free(savestr);
 		return (NULL);
 	}
-	str = (char *)malloc(sizeof(char) * (ft_strlen(left_str) - i + 1));
+	str = (char *)malloc(sizeof(char) * (ft_strlen(savestr) - i + 1));
 	if (!str)
 		return (NULL);
 	i++;
 	j = 0;
-	while (left_str[i])
-		str[j++] = left_str[i++];
+	while (savestr[i])
+		str[j++] = savestr[i++];
 	str[j] = '\0';
-	free(left_str);
+	free(savestr);
 	return (str);
 }
 
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*left_str;
+	static char	*savestr;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (0);
-	left_str = ft_read_to_left_str(fd, left_str);
-	if (!left_str)
 		return (NULL);
-	line = ft_get_line(left_str);
-	left_str = ft_new_left_str(left_str);
+	savestr = read_a_save(fd, savestr);
+	if (!savestr)
+		return (NULL);
+	line = extract_line(savestr);
+	savestr = new_savestr(savestr);
 	return (line);
 }
 
