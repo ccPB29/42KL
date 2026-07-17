@@ -1,1 +1,24 @@
-This project has been created as part of the 42 curriculum by <luli2>.
+*This project has been created as part of the 42 curriculum by <luli2>.*
+
+# Description
+## 目标：
+通过指令完成栈的排序，运用算法使指令使用次数最少
+## 概述：
+1.搭建栈数据结构，存储栈的函数
+2.编写指令函数
+3.接收合法输入，排除非int或重复
+4.对接收生成的栈进行排序：
+
+
+# Instruction
+
+# Resources
+AI used: 了解栈结构概念。拆分项目思路，编写测试程序。了解排序算法。
+
+冒泡排序：不断比较相邻两个元素，如果顺序错了就交换。O(n²)。<100小数据。
+选择排序：每次找最小值，放到前面。
+插入排序：从右开始比较更大右移。基本有序的数据。
+归并排序：。适合链表。
+快速排序：。平均速度快，数组首选。
+堆排序：。
+基数排序：按位数比较再排。
