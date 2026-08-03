@@ -6,7 +6,7 @@
 /*   By: luli2 <luli2@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 19:08:02 by luli2             #+#    #+#             */
-/*   Updated: 2026/07/17 23:02:37 by luli2            ###   ########.fr       */
+/*   Updated: 2026/08/03 11:12:39 by luli2            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,20 +64,46 @@ int	check_duplicate(t_stack *stack)
 	return (1);
 }
 
+void	assign_index(t_stack *stack)
+{
+	t_node	*current;
+	t_node	*other;
+	int		rank;
+
+	current = stack->top;
+	while (current)
+	{
+		rank = 0;
+		other = stack->top;
+		while (other)
+		{
+			if (other->value < current->value)
+				rank++;
+			other = other->next;
+		}
+		current->index = rank;
+		current = current->next;
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack	a;
+	t_stack	b;
 	int		i;
 	int		value;
 
 	a.top = NULL;
 	a.size = 0;
+	b.top = NULL;
+	b.size = 0;
 	i = 1;
 	while (i < argc)
 	{
 		if (!parse_number(argv[i], &value))
 		{
 			write(2, "Error\n", 6);
+			free_stack(&a);
 			return (1);
 		}
 		add_back(&a, new_node(value));
@@ -87,8 +113,12 @@ int	main(int argc, char **argv)
 	if (!check_duplicate(&a))
 	{
 		write(2, "Error\n", 6);
-		/* free_stack(&a); */
+		free_stack(&a);
 		return (1);
 	}
+	assign_index(&a);
+	sort_stack(&a, &b);
+	free_stack(&a);
+	free_stack(&b);
 	return (0);
 }

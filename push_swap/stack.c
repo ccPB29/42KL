@@ -31,3 +31,18 @@ void	add_back(t_stack *stack, t_node *new_node)
 	stack->size++;
 }
 
+void	free_stack(t_stack *stack)
+{
+	t_node	*current;
+	t_node	*next;
+
+	current = stack->top;
+	while (current)
+	{
+		next = current->next;
+		free(current);
+		current = next;
+	}
+	stack->top = NULL;
+	stack->size = 0;
+}

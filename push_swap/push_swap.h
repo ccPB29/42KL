@@ -3,6 +3,7 @@
 
 #include <stddef.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 #define INT_MAX 2147483647
 #define INT_MIN (-2147483648)
@@ -11,6 +12,7 @@ typedef struct s_node
 {
 	int				value;
 	struct s_node	*next;
+	int				index;
 }	t_node;
 
 typedef struct s_stack
@@ -21,9 +23,14 @@ typedef struct s_stack
 
 t_node	*new_node(int value);
 void	add_back(t_stack *stack, t_node *new);
+void	free_stack(t_stack *stack);
 
 int		parse_number(const char *str, int *value);
 int		check_duplicate(t_stack *stack);
+void	assign_index(t_stack *stack);
+
+int		is_sorted(t_stack *stack);
+void	sort_stack(t_stack *a, t_stack *b);
 
 void	sa(t_stack *a);
 void	sb(t_stack *b);
@@ -41,7 +48,7 @@ void	rrb(t_stack *b);
 void	rrr(t_stack *a, t_stack *b);
 
 /* test */
-#include <stdio.h>
-void	print_stack(char *name, t_stack *stack);
+// #include <stdio.h>
+// void	print_stack(char *name, t_stack *stack);
 
 #endif
