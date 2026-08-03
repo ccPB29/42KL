@@ -39,8 +39,8 @@ Performance tester:
 git clone https://github.com/lmalki-h/push_swap_tester.git
 cd push_swap_tester
 
-bash tester.sh . 100 100 --score
-bash tester.sh . 500 100 --score
+bash tester.sh .. 100 100 --score
+bash tester.sh .. 500 100 --score
 ```
 
 # Resources
