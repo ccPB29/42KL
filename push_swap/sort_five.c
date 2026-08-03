@@ -12,49 +12,53 @@
 
 #include "push_swap.h"
 
-static void	sort_two(t_stack *a)
+static int	find_min_pos(t_stack *a)
 {
-	if (a->top->value > a->top->next->value)
-		sa(a);
+	t_node	*cur;
+	int		min;
+	int		pos;
+	int		i;
+
+	cur = a->top;
+	min = cur->index;
+	pos = 0;
+	i = 0;
+	while (cur)
+	{
+		if (cur->index < min)
+		{
+			min = cur->index;
+			pos = i;
+		}
+		cur = cur->next;
+		i++;
+	}
+	return (pos);
 }
 
-void	sort_three(t_stack *a)
+static void	move_to_top(t_stack *a, int pos)
 {
-	int	first;
-	int	second;
-	int	third;
-
-	first = a->top->index;
-	second = a->top->next->index;
-	third = a->top->next->next->index;
-	if (first > second && second > third)
+	if (pos <= a->size / 2)
 	{
-		sa(a);
-		rra(a);
+		while (pos--)
+			ra(a);
 	}
-	else if (first > second && first > third)
-		ra(a);
-	else if (first > second)
-		sa(a);
-	else if (second > third && first > third)
-		rra(a);
-	else if (second > third)
-	{
-		sa(a);
-		ra(a);
-	}
-}
-
-void	sort_stack(t_stack *a, t_stack *b)
-{
-	if (!a || is_sorted(a))
-		return ;
-	if (a->size == 2)
-		sort_two(a);
-	else if (a->size == 3)
-		sort_three(a);
-	else if (a->size <= 5)
-		sort_five(a, b);
 	else
-		radix_sort(a, b);
+	{
+		pos = a->size - pos;
+		while (pos--)
+			rra(a);
+	}
+}
+
+void	sort_five(t_stack *a, t_stack *b)
+{
+	while (a->size > 3)
+	{
+		move_to_top(a, find_min_pos(a));
+		pb(a, b);
+	}
+	sort_three(a);
+	while (b->size)
+		pa(a, b);
 }

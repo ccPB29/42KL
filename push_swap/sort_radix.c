@@ -12,49 +12,63 @@
 
 #include "push_swap.h"
 
-static void	sort_two(t_stack *a)
+int	is_sorted(t_stack *stack)
 {
-	if (a->top->value > a->top->next->value)
-		sa(a);
+	t_node	*current;
+
+	current = stack->top;
+	while (current && current->next)
+	{
+		if (current->value > current->next->value)
+			return (0);
+		current = current->next;
+	}
+	return (1);
 }
 
-void	sort_three(t_stack *a)
+static int	get_max_bits(t_stack *stack)
 {
-	int	first;
-	int	second;
-	int	third;
+	int	max_index;
+	int	bits;
 
-	first = a->top->index;
-	second = a->top->next->index;
-	third = a->top->next->next->index;
-	if (first > second && second > third)
-	{
-		sa(a);
-		rra(a);
-	}
-	else if (first > second && first > third)
-		ra(a);
-	else if (first > second)
-		sa(a);
-	else if (second > third && first > third)
-		rra(a);
-	else if (second > third)
-	{
-		sa(a);
-		ra(a);
-	}
+	max_index = stack->size - 1;
+	bits = 0;
+	while ((max_index >> bits) != 0)
+		bits++;
+	return (bits);
 }
 
-void	sort_stack(t_stack *a, t_stack *b)
+static void	sort_one_bit(t_stack *a, t_stack *b, int bit)
 {
+	int	size;
+	int	i;
+
+	size = a->size;
+	i = 0;
+	while (i < size)
+	{
+		if (((a->top->index >> bit) & 1) == 0)
+			pb(a, b);
+		else
+			ra(a);
+		i++;
+	}
+	while (b->size > 0)
+		pa(a, b);
+}
+
+void	radix_sort(t_stack *a, t_stack *b)
+{
+	int	bit;
+	int	max_bits;
+
 	if (!a || is_sorted(a))
 		return ;
-	if (a->size == 2)
-		sort_two(a);
-	else if (a->size == 3)
-		sort_three(a);
-	else if (a->size <= 5)
-		sort_five(a, b);
-	else
-		radix_sort(a, b);
+	bit = 0;
+	max_bits = get_max_bits(a);
+	while (bit < max_bits)
+	{
+		sort_one_bit(a, b, bit);
+		bit++;
+	}
 }
