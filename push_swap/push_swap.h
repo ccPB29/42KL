@@ -6,7 +6,7 @@
 /*   By: luli2 <luli2@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 12:50:36 by luli2             #+#    #+#             */
-/*   Updated: 2026/08/03 12:52:51 by luli2            ###   ########.fr       */
+/*   Updated: 2026/08/04 12:04:44 by luli2            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stddef.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <stddef.h>
 
 # define INT_MAX 2147483647
 # define INT_MIN -2147483648
@@ -61,6 +62,10 @@ void	rr(t_stack *a, t_stack *b);
 void	rra(t_stack *a);
 void	rrb(t_stack *b);
 void	rrr(t_stack *a, t_stack *b);
+
+char	**ft_split(char const *s, char c);
+void	free_split(char **split);
+void	*ft_memcpy(void *dest, const void *src, size_t n);
 
 /* test */
 // #include <stdio.h>

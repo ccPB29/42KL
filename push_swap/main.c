@@ -6,7 +6,7 @@
 /*   By: luli2 <luli2@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 19:08:02 by luli2             #+#    #+#             */
-/*   Updated: 2026/08/03 13:05:11 by luli2            ###   ########.fr       */
+/*   Updated: 2026/08/04 11:58:51 by luli2            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,40 @@ void	assign_index(t_stack *stack)
 	}
 }
 
-static int	fill_stack(t_stack *a, int argc, char **argv)
+static int	add_split_numbers(t_stack *a, char **split)
 {
 	int	i;
 	int	value;
 
+	i = 0;
+	if (!split[0])
+		return (0);
+	while (split[i])
+	{
+		if (!parse_number(split[i], &value))
+			return (0);
+		add_back(a, new_node(value));
+		i++;
+	}
+	return (1);
+}
+
+static int	fill_stack(t_stack *a, int argc, char **argv)
+{
+	char	**split;
+	int		i;
+	int		valid;
+
 	i = 1;
 	while (i < argc)
 	{
-		if (!parse_number(argv[i], &value))
+		split = ft_split(argv[i], ' ');
+		if (!split)
 			return (0);
-		add_back(a, new_node(value));
+		valid = add_split_numbers(a, split);
+		free_split(split);
+		if (!valid)
+			return (0);
 		i++;
 	}
 	return (1);

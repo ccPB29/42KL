@@ -6,11 +6,11 @@
 /*   By: luli2 <luli2@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 15:07:00 by luli2             #+#    #+#             */
-/*   Updated: 2026/08/04 11:53:03 by luli2            ###   ########.fr       */
+/*   Updated: 2026/08/04 12:04:14 by luli2            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
 static int	count_words(const char *s, char c)
 {
