@@ -16,6 +16,8 @@ Sort a stack using the allowed operations while minimizing the total number of i
      - If the current bit is `0`, execute `pb`.
      - If the current bit is `1`, execute `ra`.
      - After scanning all elements, move everything back using `pa`.
+2nd:
+to fit eval requirment add the sort function when only input 3 and 5 number(which totally didnt mention in subject...) and add split string to hold "2 1 0"(which I thought is zsh error not subject ask...)
 
 # Instructions
 
