@@ -1,42 +1,40 @@
 class Plant:
-    def __init__(self, name, height=0.0, age=0):
+    def __init__(self, name: str, height: float, days: int) -> None:
         self.name = name
         self._height = 0.0
-        self._age = 0
-
+        self._days = 0
         self.set_height(height)
-        self.set_age(age)
+        self.set_age(days)
 
-    def set_height(self, height):
-        if height < 0:
+    def show(self) -> None:
+        print(f"{self.name}: {self._height}cm, {self._days} days old")
+
+    def age(self) -> None:
+        self._days += 1
+
+    def grow(self, speed: float) -> None:
+        self._height += speed
+        self._height = round(self._height, 1)
+
+    def set_height(self, new_height: float) -> bool:
+        if new_height < 0:
             print(f"{self.name}: Error, height can't be negative")
             return False
-
-        self._height = float(height)
+        self._height = new_height
         return True
 
-    def set_age(self, age):
-        if age < 0:
+    def set_age(self, new_age: int) -> bool:
+        if new_age < 0:
             print(f"{self.name}: Error, age can't be negative")
             return False
-
-        self._age = int(age)
+        self._days = new_age
         return True
 
-    def get_height(self):
+    def get_height(self) -> float:
         return self._height
 
-    def get_age(self):
-        return self._age
-
-    def grow(self):
-        self._height += 1.0
-
-    def age(self):
-        self._age += 1
-
-    def show(self):
-        print(f"{self.name}: {round(self._height, 1)}cm, {self._age} days old")
+    def get_age(self) -> int:
+        return self._days
 
 
 class Flower(Plant):
