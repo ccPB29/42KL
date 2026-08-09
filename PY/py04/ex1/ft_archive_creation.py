@@ -30,13 +30,7 @@ def read_file(filename: str) -> None:
     print("---")
     print()
 
-    new_content = ""
-
-    for char in content:
-        if char == "\n":
-            new_content += "#\n"
-        else:
-            new_content += char
+    new_content = content.replace("\n", "#\n")
 
     if len(content) > 0 and content[-1] != "\n":
         new_content += "#"
