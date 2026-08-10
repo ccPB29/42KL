@@ -8,8 +8,8 @@ def secure_archive(
         if action == "read":
             with open(filename, "r") as file:
                 data = file.read()
-            #    print(file.closed)
-            #print(file.closed)
+#               print(file.closed)
+#           print(file.closed)
             return (True, data)
 
         if action == "write":
@@ -41,7 +41,9 @@ def main() -> None:
     print()
 
     if result[0]:
-        print("Using 'secure_archive' to write previous content to a new file:")
+        print(
+            "Using 'secure_archive' to write previous content to a new file:"
+        )
         print(
             secure_archive(
                 "new_fragment.txt",

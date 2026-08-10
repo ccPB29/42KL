@@ -7,7 +7,7 @@ def read_file(filename: str) -> None:
     print(f"Accessing file '{filename}'")
 
     try:
-        file: typing.IO = open(filename, "r")
+        file: typing.IO[str] = open(filename, "r")
     except OSError as error:
         sys.stderr.write(
             f"[STDERR] Error opening file '{filename}': {error}\n"
@@ -54,7 +54,7 @@ def read_file(filename: str) -> None:
         return
 
     try:
-        new_file: typing.IO = open(new_filename, "w")
+        new_file: typing.IO[str] = open(new_filename, "w")
     except OSError as error:
         sys.stderr.write(
             f"[STDERR] Error opening file '{new_filename}': {error}\n"
