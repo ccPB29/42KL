@@ -4,6 +4,10 @@ import sys
 def main() -> None:
     print("=== Inventory System Analysis ===")
 
+    if len(sys.argv) == 1:
+        print("Usage: python3 ft_inventory_system.py <item:quantity> ...")
+        return
+
     inventory: dict[str, int] = {}
 
     for arg in sys.argv[1:]:
@@ -30,31 +34,33 @@ def main() -> None:
     total = sum(inventory.values())
     print(f"Total quantity of the {len(items)} items: {total}")
 
-    for item in inventory:
-        percentage = inventory[item] / total * 100
+    if total != 0:
+        for item in inventory:
+            percentage = inventory[item] / total * 100
+            print(
+                f"Item {item} represents "
+                f"{round(percentage, 1)}%"
+            )
+
+    if items:
+        most_item = items[0]
+        least_item = items[0]
+
+        for item in items:
+            if inventory[item] > inventory[most_item]:
+                most_item = item
+
+            if inventory[item] < inventory[least_item]:
+                least_item = item
+
         print(
-            f"Item {item} represents "
-            f"{round(percentage, 1)}%"
+            f"Item most abundant: {most_item} "
+            f"with quantity {inventory[most_item]}"
         )
-
-    most_item = items[0]
-    least_item = items[0]
-
-    for item in items:
-        if inventory[item] > inventory[most_item]:
-            most_item = item
-
-        if inventory[item] < inventory[least_item]:
-            least_item = item
-
-    print(
-        f"Item most abundant: {most_item} "
-        f"with quantity {inventory[most_item]}"
-    )
-    print(
-        f"Item least abundant: {least_item} "
-        f"with quantity {inventory[least_item]}"
-    )
+        print(
+            f"Item least abundant: {least_item} "
+            f"with quantity {inventory[least_item]}"
+        )
 
     inventory.update({"magic_item": 1})
     print(f"Updated inventory: {inventory}")

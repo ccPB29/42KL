@@ -113,68 +113,109 @@ class LogProcessor(DataProcessor):
             self._data.append(f"{data['log_level']}: {data['log_message']}")
 
 
+class DataStream:
+    def __init__(self) -> None:
+        self._processors: list[DataProcessor] = []
+
+    def register_processor(self, proc: DataProcessor) -> None:
+        self._processors.append(proc)
+
+    def process_stream(self, stream: list[typing.Any]) -> None:
+        for data in stream:
+            handled = False
+
+            for proc in self._processors:
+                if proc.validate(data):
+                    proc.ingest(data)
+                    handled = True
+                    break
+            
+            if not handled:
+                print(
+                    f"DataStream error - Can't process element in stream: {data}"
+                )
+
+    def print_processors_stats(self) -> None:
+        print("== DataStream statistics ==")
+
+        if len(self._processors) == 0:
+            print("No processor found, no data")
+            return
+
+        for proc in self._processors:
+            total = proc._rank + len(proc._data)
+            remaining = len(proc._data)
+
+            print(
+                f'{proc.__class__.__name__.replace("Processor", " Processor")}: '
+                f"total {total} items processed, "
+                f"remaining {remaining} on processor"
+            )
+
+
 def main() -> None:
+    print("=== Code Nexus - Data Stream ===")
+    print()
+
+    stream = DataStream()
+
+    print("Initialize Data Stream...")
+    stream.print_processors_stats()
+    print()
+
+    print("Registering Numeric Processor")
+    print()
     numeric = NumericProcessor()
+    stream.register_processor(numeric)
+
+    data = [
+        "Hello world",
+        [3.14, -1, 2.71],
+        [
+            {
+                "log_level": "WARNING",
+                "log_message": "Telnet access! Use ssh instead"
+            },
+            {
+                "log_level": "INFO",
+                "log_message": "User Wil is connected"
+            }
+        ],
+        42,
+        ["Hi", "five"]
+    ]
+
+    print(f"Send first batch of data on stream: {data}")
+    stream.process_stream(data)
+    stream.print_processors_stats()
+    print()
+
+    print("Registering other data processors")
     text = TextProcessor()
     log = LogProcessor()
 
-    print("=== Code Nexus - Data Processor ===")
+    stream.register_processor(text)
+    stream.register_processor(log)
+
+    print("Send the same batch again")
+    stream.process_stream(data)
+    stream.print_processors_stats()
     print()
 
-    print("Testing Numeric Processor...")
-    print(f" Trying to validate input '42': {numeric.validate(42)}")
-    print(f" Trying to validate input 'Hello': {numeric.validate('Hello')}")
-
-    print(" Test invalid ingestion of string 'foo' without prior validation:")
-    try:
-        numeric.ingest("foo")
-    except ValueError as error:
-        print(f" Got exception: {error}")
-
-    numeric.ingest([1, 2, 3, 4, 5])
-
-    print(" Processing data: [1, 2, 3, 4, 5]")
-    print(" Extracting 3 values...")
+    print(
+        "Consume some elements from the data processors: "
+        "Numeric 3, Text 2, Log 1"
+    )
 
     for _ in range(3):
-        rank, value = numeric.output()
-        print(f" Numeric value {rank}: {value}")
-
-    print()
-    print("Testing Text Processor...")
-    print(f" Trying to validate input '42': {text.validate(42)}")
-    print(f" Trying to validate input 'Hello': {text.validate('Hello')}")
-
-    text.ingest(["Hello", "Nexus", "World"])
-    print(" Processing data: ['Hello', 'Nexus', 'World']")
-    print(" Extracting 1 value...")
-
-    rank, value = text.output()
-    print(f" Text value {rank}: {value}")
-
-    print()
-    print("Testing Log Processor...")
-    print(f" Trying to validate input 'Hello': {log.validate('Hello')}")
-
-    logs = [
-        {
-            "log_level": "NOTICE",
-            "log_message": "Connection to server"
-        },
-        {
-            "log_level": "ERROR",
-            "log_message": "Unauthorized access!!"
-        }
-    ]
-    print(f" Trying to validate input '{logs}': {log.validate(logs)}")
-
-    log.ingest(logs)
-    print(f" Processing data: {logs}")
-    print(" Extracting 2 values...")
+        numeric.output()
 
     for _ in range(2):
-        rank, value = log.output()
-        print(f" Log entry {rank}: {value}")
+        text.output()
+
+    log.output()
+
+    stream.print_processors_stats()
 
 
 if __name__ == "__main__":
