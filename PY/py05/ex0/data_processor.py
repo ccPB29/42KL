@@ -73,7 +73,7 @@ class TextProcessor(DataProcessor):
         if not self.validate(data):
             raise ValueError("Improper text data")
 
-        if type(data) is list:
+        if isinstance(data, list):
             for item in data:
                 self._data.append(item)
         else:
@@ -106,9 +106,11 @@ class LogProcessor(DataProcessor):
         if not self.validate(data):
             raise ValueError("Improper log data")
 
-        if type(data) is list:
+        if isinstance(data, list):
             for item in data:
-                self._data.append(f"{item['log_level']}: {item['log_message']}")
+                self._data.append(
+                    f"{item['log_level']}: {item['log_message']}"
+                )
         else:
             self._data.append(f"{data['log_level']}: {data['log_message']}")
 

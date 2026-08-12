@@ -73,7 +73,7 @@ class TextProcessor(DataProcessor):
         if not self.validate(data):
             raise ValueError("Improper text data")
 
-        if type(data) is list:
+        if isinstance(data, list):
             for item in data:
                 self._data.append(item)
         else:
@@ -106,9 +106,11 @@ class LogProcessor(DataProcessor):
         if not self.validate(data):
             raise ValueError("Improper log data")
 
-        if type(data) is list:
+        if isinstance(data, list):
             for item in data:
-                self._data.append(f"{item['log_level']}: {item['log_message']}")
+                self._data.append(
+                    f"{item['log_level']}: {item['log_message']}"
+                )
         else:
             self._data.append(f"{data['log_level']}: {data['log_message']}")
 
@@ -129,10 +131,11 @@ class DataStream:
                     proc.ingest(data)
                     handled = True
                     break
-            
+
             if not handled:
                 print(
-                    f"DataStream error - Can't process element in stream: {data}"
+                    f"DataStream error - Can't "
+                    f"process element in stream: {data}"
                 )
 
     def print_processors_stats(self) -> None:
@@ -145,9 +148,10 @@ class DataStream:
         for proc in self._processors:
             total = proc._rank + len(proc._data)
             remaining = len(proc._data)
+            class_name = proc.__class__.__name__
 
             print(
-                f'{proc.__class__.__name__.replace("Processor", " Processor")}: '
+                f'{class_name.replace("Processor", " Processor")}: '
                 f"total {total} items processed, "
                 f"remaining {remaining} on processor"
             )
