@@ -1,5 +1,5 @@
-from .exceptions import InvalidStrategyError
 from .strategies import (
+    InvalidStrategyError,
     AggressiveStrategy,
     BattleStrategy,
     DefensiveStrategy,

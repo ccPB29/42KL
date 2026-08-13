@@ -3,7 +3,9 @@ import abc
 from ex0.creature import Creature
 from ex1.capabilities import HealCapability, TransformCapability
 
-from .exceptions import InvalidStrategyError
+
+class InvalidStrategyError(Exception):
+    pass
 
 
 class BattleStrategy(abc.ABC):

@@ -26,11 +26,12 @@ def battle(
                 first, first_strategy = creatures[i]
                 second, second_strategy = creatures[j]
 
+                print()
                 print("* Battle *")
                 print(first.describe())
-                print("vs.")
+                print(" vs.")
                 print(second.describe())
-                print("now fight!")
+                print(" now fight!")
 
                 for action in first_strategy.act(first):
                     print(action)
@@ -44,18 +45,23 @@ def battle(
 
 def main() -> None:
     print("Tournament 0 (basic)")
+    print(" [ (Flameling+Normal), (Healing+Defensive) ]")
     battle([
         (FlameFactory(), NormalStrategy()),
         (HealingCreatureFactory(), DefensiveStrategy()),
     ])
+    print()
 
     print("Tournament 1 (error)")
+    print(" [ (Flameling+Aggressive), (Healing+Defensive) ]")
     battle([
         (FlameFactory(), AggressiveStrategy()),
         (HealingCreatureFactory(), DefensiveStrategy()),
     ])
+    print()
 
     print("Tournament 2 (multiple)")
+    print(" [ (Aquabub+Normal), (Healing+Defensive), (Transform+Aggressive) ]")
     battle([
         (AquaFactory(), NormalStrategy()),
         (HealingCreatureFactory(), DefensiveStrategy()),
