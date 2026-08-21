@@ -32,9 +32,9 @@ class Config:
     def validate_config_format(self) -> None:
         self.WIDTH = int(self.config["WIDTH"])
         self.HEIGHT = int(self.config["HEIGHT"])
-        r, c = tuple(int(x) for x in self.config["ENTRY"].split(",", 1))
+        c, r = tuple(int(x) for x in self.config["ENTRY"].split(",", 1))
         self.ENTRY = (r, c)
-        r, c = tuple(int(x) for x in self.config["EXIT"].split(",", 1))
+        c, r = tuple(int(x) for x in self.config["EXIT"].split(",", 1))
         self.EXIT = (r, c)
         self.OUTPUT_FILE = self.config["OUTPUT_FILE"].strip("\"'")
         self.PERFECT = self.config["PERFECT"].strip("\"'").lower() == "true"
@@ -81,8 +81,8 @@ class Config:
         with open(self.OUTPUT_FILE, "w") as file:
             file.write(
                 maze_hex + "\n\n" +
-                f"{self.ENTRY[0]},{self.ENTRY[1]}" +
-                "\n" + f"{self.EXIT[0]},{self.EXIT[1]}"
+                f"{self.ENTRY[1]},{self.ENTRY[0]}" +
+                "\n" + f"{self.EXIT[1]},{self.EXIT[0]}"
                 + "\n" +
                 "".join(
                     [item[1] for item in solution_path

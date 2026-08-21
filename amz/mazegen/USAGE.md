@@ -22,4 +22,3 @@ from mazegen import ...
 
 ## Access a solution
 
-写 example。

@@ -5,11 +5,12 @@ PEP257 note
 -----config-------
 config output两次删了一个
 ? DELAY、SEED 不应该是 mandatory。题目规定必须有的是 WIDTH / HEIGHT / ENTRY / EXIT / OUTPUT_FILE / PERFECT，其他配置可以是 optional。
-? perfect更合理的是只接受 true / false
+? perfect更合理的是只接受 true / false   [to]
 raise 不能生成42的
 ? x=width, y=height(原始rc不对应)
 调整顺序先查正数再查别的
 2x2也不行
+r,c [to]
 
 --------maze-------
 ？墙统一
@@ -17,23 +18,8 @@ raise 不能生成42的
 ？是为了print(WALL, end="")
 
 --------gener-------
-？不保证大于2个loop，要加一个 loops_created 之类的计数/验证。
-3×3 large open area
-→ 有局部预防逻辑 ✅
-→ 没有最终全局验证 ⚠️
-
-four corners open
-→ 没有专门保证 ❌
-
-centre open
-→ 没有专门保证 ❌
-
-至少 2 loops
-→ 没有明确保证/验证 ❌
-
-没有保证没有end
-
-验证所有非 42 cell 都被访问，否则理论上可能留下孤立区域。
+？不保证大于2个loop，要加一个 loops_created 之类的计数/验证。[to]
+3×3 large open area [to]
 
 --------solver--------
 
@@ -41,9 +27,6 @@ centre open
 ？show path/换颜色/开关动画 要重新生成吗
 
 I think there may be one issue with the reusable-module requirement. Currently MazeGenerator takes an already-created Maze and perfect, while dimensions are passed to Maze, the seed is set globally in a_maze_ing.py, and the solution is only accessible through a separate MazeSolver. The subject says MazeGenerator should be the main entry point and the documentation should show how to pass custom dimensions and a seed, access the generated structure, and access at least one solution. Maybe we should expose these through MazeGenerator itself, while keeping Maze and MazeSolver internally.
-
-5. 要做bonus？
-6. 6，6 的时候中心不是空的，怎么定义中心
 
 ---------------------------------------
 ```text
