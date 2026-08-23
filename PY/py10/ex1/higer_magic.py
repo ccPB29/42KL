@@ -38,6 +38,7 @@ def spell_sequence(spells: list[Callable]) -> Callable:
 
     return sequence
 
+
 def fireball(target: str, power: int) -> str:
     return f"Fireball hits {target} with {power} power"
 
@@ -54,7 +55,10 @@ def main() -> None:
     print()
     print("Testing spell combiner...")
     combined = spell_combiner(fireball, heal)
-    print(f"Combined spell result: {combined('Dragon', 10)[0]}, {combined('Dragon', 10)[1]}")
+    print(
+        f"Combined spell result: "
+        f"{combined('Dragon', 10)[0]}, {combined('Dragon', 10)[1]}"
+    )
 
     print("\nTesting power amplifier...")
     mega_fireball = power_amplifier(fireball, 3)

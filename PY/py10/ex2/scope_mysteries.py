@@ -19,7 +19,7 @@ def spell_accumulator(initial_power: int) -> Callable:
         nonlocal power
         power += spell_power
         return power
-    
+
     return accumulator
 
 
@@ -35,8 +35,8 @@ def memory_vault() -> dict[str, Callable]:
 
     def store(key: str, value: object) -> None:
         memory[key] = value
-    
-    def recall(key: str) -> str:
+
+    def recall(key: str) -> object:
         return memory.get(key, "Memory not found")
 
     return {

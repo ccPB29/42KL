@@ -26,6 +26,7 @@ def spell_transformer(spells: list[str]) -> list[str]:
             )
     )
 
+
 def mage_stats(mages: list[dict]) -> dict[str, int | float]:
     """Calculate maximum, minimum, and average mage power."""
     return {
