@@ -3,7 +3,7 @@ from collections.abc import Callable
 
 def spell_combiner(spell1: Callable, spell2: Callable) -> Callable:
     def combined(target: str, power: int) -> tuple[str, str]:
-        return(
+        return (
             spell1(target, power),
             spell2(target, power)
         )
